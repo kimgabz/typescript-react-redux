@@ -5,9 +5,20 @@ interface AppProps {
     color?: string;
 }
 
-class App extends React.Component<AppProps> {
+interface AppState {
+    counter: number;
+}
+
+class App extends React.Component<AppProps, AppState> {
+
+    constructor(props: AppProps) {
+        super(props);
+
+        this.state = { counter: 0}
+    }
+    
     render() {
-    return <div>{this.props.color}</div>;
+        return <div>Welcome to Summoner's Rift</div>;
     }
 }
 

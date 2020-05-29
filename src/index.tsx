@@ -1,29 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
-interface AppProps {
-    color?: string;
-}
+import { App } from './components/App';
+import { reducers } from './reducers';
 
-interface AppState {
-    counter: number;
-}
+const store = createStore(reducers, applyMiddleware(thunk));
 
-const App = (props: AppProps): JSX.Element => {
-    return <div>{props.color}</div>
-}
 
-// class App extends React.Component<AppProps, AppState> {
-
-//     constructor(props: AppProps) {
-//         super(props);
-
-//         this.state = { counter: 0}
-//     }
-
-//     render() {
-//         return <div>Welcome to Summoner's Rift</div>;
-//     }
-// }
-
-ReactDOM.render(<App color="Red"/>, document.querySelector('#root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>, 
+    document.querySelector('#root')
+);
